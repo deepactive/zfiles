@@ -1,0 +1,183 @@
+<?php echo $__env->yieldSection(); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="<?php echo url().'/public/themes/uploads/favicon.png'; ?>">
+    <title><?php echo $data['title'].' | '.$data['settings']->sitename; ?></title>
+    <!-- Bootstrap Core CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/bootstrap_2.min.css'); ?>
+
+    <!-- Font Awesome Fonts -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/font-awesome/css/font-awesome.min.css'); ?>
+
+    <!-- Custom CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/sb-admin.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/social.css'); ?>
+
+
+    <?php echo $__env->yieldContent('style'); ?>
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/tabs.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/navbar.css'); ?>
+
+
+    <!--<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet'
+     type='text/css'>-->
+   
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<?php echo $__env->make('user.--header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<div class="container">
+    <!-- PAGE WRAPPER -->
+    <div id="wrapper"> 
+    <?php if( $data['topAds'] ): ?>
+    <!-- Top Advertising Area  -->
+    <div class="col-md-12 ">
+    <div class="ads-top">
+        <?php echo $data['topAds']; ?>
+
+    </div>
+    </div>
+    <!-- /# TopAdvertising Area  -->
+    <?php endif; ?>
+
+        <!-- Sidebar -->
+<section >
+    <div class="container">
+        <div class="row">
+            <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
+            <div class="board-inner">
+                <ul class="nav nav-tabs" id="myTab">
+                <li <?php echo ($data['nav'] === 'dashboard') ? 'class="active"' : ''; ?>>
+                        <a href="<?php echo url(); ?>"  title="Dashboard">
+                             <span class="round-tabs one">
+                              <i class="fa fa-tachometer fa-stack-1x "></i>
+                              
+                      </span>
+                       
+                        </a>
+                    </li>
+
+                <li <?php echo ($data['nav'] === 'upload') ? 'class="active"' : ''; ?>>
+                        <a href="<?php echo url('/user/'.$data['userName']).'/upload'; ?>" title="Upload">
+                            <span class="round-tabs two">
+                         <i class="fa fa-cloud-upload fa-stack-1x "></i>
+                     </span>
+                        </a>
+                    </li>
+                <li <?php echo ($data['nav'] === 'files') ? 'class="active"' : ''; ?>>
+                        <a href="<?php echo url('/user/'.$data['userName']).'/files'; ?>" title="My Files">
+                            <span class="round-tabs three">
+                          <i class="fa fa-dropbox fa-stack-1x "></i>
+                     </span> </a>
+                    </li>
+
+                <li <?php echo ($data['nav'] === 'send') ? 'class="active"' : ''; ?>>
+                        <a href="<?php echo url('/user/'.$data['userName']).'/send'; ?>" title="Send Files">
+                            <span class="round-tabs four">
+                              <i class="fa fa-paper-plane fa-stack-1x "></i>
+                         </span>
+                        </a>
+                    </li>
+                <?php if(DB::table('pages')->count() ): ?>
+
+                <li <?php echo ($data['nav'] === 'pages') ? 'class="active"' : ''; ?>>
+                        <a href="<?php echo url('/user/'.$data['userName']).'/pages'; ?>" title="Pages">
+                            <span class="round-tabs five">
+                              <i class="fa fa-files-o fa-stack-1x "></i>
+                         </span> </a>
+                    </li>
+                <?php endif; ?>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+               <!-- Tab Content -->     
+
+                <?php if($data['nav'] === 'dashboard' ): ?>
+                    <?php echo $__env->yieldContent('dashboard'); ?>
+                <?php endif; ?>
+                <?php if($data['nav'] === 'upload' ): ?>
+                    <?php echo $__env->yieldContent('upload'); ?>
+                <?php endif; ?>
+                <?php if($data['nav'] === 'files' ): ?>
+                    <?php echo $__env->yieldContent('files'); ?>
+                <?php endif; ?>
+                <?php if($data['nav'] === 'send' ): ?>
+                    <?php echo $__env->yieldContent('send'); ?>
+                <?php endif; ?>
+                <?php if($data['nav'] === 'pages' ): ?>
+                    <?php echo $__env->yieldContent('pages'); ?>
+                <?php endif; ?>
+                <?php if($data['nav'] === 'settings' ): ?>
+                    <?php echo $__env->yieldContent('settings'); ?>
+                <?php endif; ?>
+                <!-- /#Tab Content -->     
+
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<?php if( Social::find(1) ): ?>
+<div id='social-sidebar'><!-- SOCIAL Media SIDEBAR -->
+<ul>
+   <?php if( Social::find(1)->twitterLink !== '' ): ?>
+    <li>
+        <a class='entypo-twitter' href='<?php echo Social::find(1)->twitterLink; ?>' target='_blank'>
+           <i class="fa fa-twitter "></i>
+            <span>Twitter</span>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if(Social::find(1)->facebookLink !== ''): ?>
+    <li>
+        <a class='entypo-facebook' href='<?php echo Social::find(1)->facebookLink; ?>' target='_blank'>
+             <i class="fa fa-facebook "></i>
+            <span>facebook</span>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if(Social::find(1)->googlePlusLink !== ''): ?>
+    <li>
+        <a class='entypo-gplus' href='<?php echo Social::find(1)->googlePlusLink; ?>' target='_blank'>
+            <i class="fa fa-google-plus "></i>
+            <span>google+</span>
+        </a>
+    </li>
+    <?php endif; ?>
+</ul>
+</div> <!-- /#SOCIAL Media SIDEBAR -->
+<?php endif; ?>
+
+
+        
+
+
+<!-- jQuery -->
+<?php echo HTML::script('public/themes/defualt/assets/js/jquery-1.11.3.min.js'); ?>
+
+<!-- Bootstrap Core JavaScript -->
+<?php echo HTML::script('public/themes/defualt/assets/js/bootstrap.min.js'); ?>
+
+<?php echo $__env->yieldContent('javascript'); ?>
+<?php echo $__env->make('user.--footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+<script language="javascript">
+
+</script>

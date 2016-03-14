@@ -1,0 +1,100 @@
+<?php $__env->startSection('style'); ?>
+   <!-- DROPZONE Core JavaScript -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/dropzone.js'); ?>
+
+    <!-- DropZone CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/basic.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/dropzone.css'); ?>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('upload'); ?>
+
+    <div class="header-content">
+      
+      <div class="col-md-12">
+       
+        <div class="panel panel-primary">
+          
+          <div class="panel-heading">
+            <i style="font-size:18px;" class="fa fa-cloud-upload">
+            </i> Upload New Files / Photos  
+            <span style="font-size:11px;">
+            (Max Files:<?php echo uploadsettings::find(1)->maxUploadsFiles; ?>)
+            | Max File Size :(<?php echo formatFileSize(uploadSettings::find(1)->maxFileSize); ?>) 
+
+            </span>   
+          </div>
+          
+          <div class="panel-body">
+            
+            <div style="overflow:visible;" id="dropzone">
+                <?php echo Form::open(array(
+                    'url' => url().'/uploadFile',
+                    'class'=>'dropzone', 
+                    'id'=>'my-dropzone')); ?>
+
+
+                <!-- Multiple file upload-->
+
+                <div class="dz-message"><center>
+                    <i style="font-size:45px" class="fa fa-cloud-upload fa-2x"></i>
+                    <h4>Drag Your Files - Photos to Upload</h4>
+                    <span>Or click to browse</span></center>
+
+                </div> 
+
+                <div class="fallback">
+                    <input name="file" type="file" multiple />
+                </div>
+
+            <?php echo Form::close(); ?>
+
+        </div>
+        <br><small>File Extensions :[<?php echo uploadSettings::find(1)->allowedFilesExt; ?>] </small>
+
+            
+          </div>
+          
+        </div> <!-- /# END panel default -->
+        
+      </div> <!-- /# END col-md 12 --> 
+       
+    </div> <!-- /# END HEADER CONTETNT -->
+<?php $__env->stopSection(); ?>
+
+
+<?php $__env->startSection('javascript'); ?>
+
+<script language="javascript">
+// myDropzone is the configuration for the element that has an id attribute
+  // with the value my-dropzone (or myDropzone)
+    Dropzone.options.myDropzone = {
+        maxFiles: <?php echo uploadsettings::find(1)->maxUploadsFiles; ?>,
+        maxFilesize: <?php echo $data['MaxUploadSize']; ?>,
+
+
+  init: function () {
+       this.on("maxfilesexceeded", function(file){
+    });
+
+    this.on("success", function (file) {
+      if (this.getQueuedFiles().length === 0) {
+            // Your application has indicated there's an error
+            window.setTimeout(function(){
+
+            // Move to a new location or you can do something else
+            window.location = "<?php echo url('user/'.Auth::User()->username.'/files'); ?>";
+
+    }, 3000);
+      }
+    });
+  }
+};
+    
+</script>
+<?php $__env->stopSection(); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('user.--index', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

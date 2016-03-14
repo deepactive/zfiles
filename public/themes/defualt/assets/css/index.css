@@ -1,0 +1,291 @@
+
+hr {
+    max-width: 150px;
+    border-color: #18BC9C;
+    border-width: 1px;
+}
+
+hr.light {
+    border-color: #ddd;
+    border-width: 1px;
+    min-width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+a {
+    color: #f05f40;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    
+}
+
+a:hover,
+a:focus {
+    color: #eb3812;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    font-family: 'Ubuntu', sans-serif;
+        color: white;
+
+}
+
+p,a {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+            color: white;
+        font-family: 'Ubuntu', sans-serif;
+
+
+}
+
+
+
+
+body {
+    background: url('../img/header.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    background-color:#333;
+    text-align:center;
+}
+
+.navbar {
+    background: none;
+}
+
+.navbar-default{
+    background: none;
+}
+
+.navbar-default .navbar-nav>li>a{
+    background: #fff;
+    margin-left: 30px;
+    color: #76C2AF;
+    border-radius: 0px 0px 10px 10px;
+    height: 48px;
+    overflow: hidden;
+    padding: 13px;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus{
+    background: #76C2AF;
+    color: #fff;
+}
+
+ .header-content {
+    padding: 30px 15px;
+    text-align: center;
+     
+}
+
+ .header-content .header-content-inner h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 400;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+ .header-content .header-content-inner hr {
+    margin: 30px auto;
+    border-color: #fefefe;
+    max-width:80%;
+    border-width: thin;
+}
+
+ .header-content .header-content-inner p {
+    margin-bottom: 50px;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,.9);
+    letter-spacing: 1px;
+        font-family: 'Ubuntu', sans-serif;
+
+}
+
+/** Ads Style **/
+
+.ads{
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 4px;
+    border:1px dashed #fff;
+}
+
+
+/** /#Ads Style **/
+
+.dropzone{
+    min-height: 150px;
+    width: 90%;
+    overflow:inherit;
+    margin: auto;
+    border: 2px dashed rgba(255, 255, 255, 0.8);
+    padding: 20px 20px;
+    color: white;
+
+}
+
+
+@media(min-width:768px) {
+    
+
+     .header-content {
+    }
+
+     .header-content .header-content-inner {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1000px;
+    }
+    
+    .header-content .header-content-inner hr {
+        margin: 30px auto;
+        border-color: #fefefe;
+        max-width:65%;
+        border-width: thin;
+    }
+
+     .header-content .header-content-inner p {
+        margin-right: auto;
+        margin-left: auto;
+         margin: 10px auto;
+        max-width: 55%;
+        font-size: 15px;
+        font-family: 'Ubuntu', sans-serif;
+
+    }
+    
+    .dropzone{
+        min-height: 150px;
+        width: 65%;
+    overflow:inherit;
+        margin: auto;
+        border: 2px dashed rgba(255, 255, 255, 0.8);
+        padding: 20px 20px;
+        color: white;
+    }
+}
+
+.dropzone .dz-preview.dz-image-preview{
+    background: none;
+    padding: 0px;
+    border: 3px solid #fff;
+    border-radius: 3px;
+    overflow: inherit;
+}
+.dropzone .dz-preview {
+    margin: 10px;
+}
+
+.dropzone .dz-preview .dz-image {
+    border-radius: 0px;
+    
+}
+
+.dropzone .dz-preview .dz-remove {
+    display: none;
+}
+
+.dropzone .dz-preview .dz-error-message {
+    top:100px;
+}
+
+/* ---------- Social Sidebar ---------- */
+
+#social-sidebar a { text-decoration: none; }
+#social-sidebar ul,#social-sidebar ul li,#social-sidebar ul li a {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+ 
+#social-sidebar {
+    left: 0;
+    z-index:999;
+     /* (li * a:width) / -2 */
+	position: fixed;
+	top: 30%;
+}
+#social-sidebar ul li:first-child a { border-radius: 0 5px 0 0; }
+#social-sidebar ul li:last-child a { border-radius: 0 0 5px 0; }
+#social-sidebar ul li a {
+	color: #fff;
+	display: block;
+	height: 50px;
+	font-size: 18px;
+	line-height: 50px;
+	position: relative;
+	text-align: center;
+	width: 50px;
+        background: #2C3E50;
+
+}
+#social-sidebar ul li a:hover span {
+	left: 130%;
+	opacity: 1;
+}
+#social-sidebar ul li a span {
+	border-radius: 3px;
+	line-height: 24px;
+	left: -100%;
+	margin-top: -16px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	padding: 4px 8px;
+	position: absolute;
+	-webkit-transition: opacity .3s, left .4s;
+	-moz-transition: opacity .3s, left .4s;
+	-ms-transition: opacity .3s, left .4s;
+	-o-transition: opacity .3s, left .4s;
+	transition: opacity .3s, left .4s;
+	top: 50%;
+	z-index: -1;
+    font-size: 14px;
+    font-weight: 700;
+}
+#social-sidebar ul li a span:before {
+	content: "";
+	display: block;
+	height: 8px;
+	left: -4px;
+	margin-top: -4px;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	width: 8px;
+	z-index: -2;
+}
+#social-sidebar ul li a[class*="twitter"]:hover,
+#social-sidebar ul li a[class*="twitter"] span,
+#social-sidebar ul li a[class*="twitter"] span:before { background: #6CDFEA; }
+#social-sidebar ul li a[class*="gplus"]:hover,
+#social-sidebar ul li a[class*="gplus"] span,
+#social-sidebar ul li a[class*="gplus"] span:before { background: #E34429; }
+#social-sidebar ul li a[class*="tumblr"]:hover,
+#social-sidebar ul li a[class*="tumblr"] span,
+#social-sidebar ul li a[class*="tumblr"] span:before { background: #1769ff; }
+#social-sidebar ul li a[class*="facebook"]:hover,
+#social-sidebar ul li a[class*="facebook"] span,
+#social-sidebar ul li a[class*="facebook"] span:before { background: #234999; }
+#social-sidebar ul li a[class*="rss"]:hover,
+#social-sidebar ul li a[class*="rss"] span,
+#social-sidebar ul li a[class*="rss"] span:before { background: #f57b05; }
+
+

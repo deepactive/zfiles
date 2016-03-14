@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="<?php echo url().'/public/themes/uploads/favicon.png'; ?>">
+    
+    <title><?php echo $data['fileName'].' | '.$data['settings']->sitename; ?></title>
+    <!-- Bootstrap Core CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/bootstrap_2.min.css'); ?>
+
+    <!-- Font Awesome Fonts -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/font-awesome/css/font-awesome.min.css'); ?>
+
+    <!-- Custom CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/social.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/navbar.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/jquery.frontbox-1.1.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/home.css'); ?>
+
+    
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet' type='text/css'>
+      
+    <!-- SEO Meta  -->
+    <meta name="description" content="Download <?php echo $data['fileName']; ?>">
+	<meta name="author" content="Download <?php echo $data['fileName']; ?>">
+	<meta name="robots" content="INDEX,FOLLOW"/>
+	<meta name="robots" content="all"/>
+	<meta name="distribution" content="global"/>
+
+	<meta property="og:title" content='<?php echo $data['fileName'].' | '.$data['settings']->sitename; ?>' />
+	<meta property="og:image" content="<?php echo url().'/public/themes/uploads/logo.png'; ?>" />
+	<meta property="og:site_name" content="<?php echo Settings::find(1)->sitename; ?>"/>
+	<meta property="og:description" content="<?php echo Settings::find(1)->description; ?>" />
+	<link rel="image_src" href="<?php echo url().'/public/themes/uploads/logo.png'; ?>" />
+	<meta itemprop="name" content="<?php echo Settings::find(1)->sitename; ?>" />
+   
+    <!--  -->  
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<nav style="border-radius:0;" class="navbar navbar-default navbar-xs" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+      <a class="navbar-brand" href="<?php echo url('/'); ?>">
+        <img alt="Brand" src="<?php echo url().'/public/themes/uploads/logo.png'; ?>">
+      </a>
+    </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-right top-nav">
+        <?php if( !Auth::check() ): ?> 
+            <li><a href="<?php echo url('/auth/login'); ?>">
+                <i class="fa fa-lock"></i> Login</a>
+            </li>
+            <li style="margin-left:20px;"><a href="<?php echo url('/auth/signup'); ?>">
+                <i class="fa fa-user-plus"></i> SignUp</a>
+            </li>
+        <?php else: ?> 
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-user"></i>
+                   | <?php echo Auth::user()->username; ?> <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <?php if(Auth::user()->level === 'admin'): ?>                              
+                    <li>
+                        <a href="<?php echo URL().'/admin'; ?>">
+                          <i class="fa fa-fw fa-tasks"></i> Admin Panel
+                        </a>
+                    </li>   
+                    <?php endif; ?>
+                    <li>
+                        <a href="<?php echo url('/user/'.Auth::user()->username); ?>">
+                            <i class="fa fa-fw fa-user"></i> My Profile
+                        </a>
+                        <a href="<?php echo url('/user/'.Auth::user()->username.'/settings'); ?>">
+                            <i class="fa fa-fw fa-gear"></i> Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?php echo URL(); ?>/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                    </li>
+                </ul>
+            </li>
+        <?php endif; ?>      
+        </ul>
+    
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+
+<div class="container">
+
+
+<?php if( $data['topAds'] ): ?>
+<!-- Top Advertising Area  -->
+<div class="col-md-12 ">
+<div class="ads-top">
+    <?php echo $data['topAds']; ?>
+
+</div>
+</div>
+<!-- /# TopAdvertising Area  -->
+<?php endif; ?>
+
+
+<?php if( Social::find(1) ): ?>
+<!-- SOCIAL Media SIDEBAR -->
+<div id='social-sidebar'>
+    <ul>
+       <?php if( Social::find(1)->twitterLink !== '' ): ?>
+        <li>
+            <a class='entypo-twitter' href='<?php echo Social::find(1)->twitterLink; ?>' target='_blank'>
+               <i class="fa fa-twitter "></i>
+                <span>Twitter</span>
+            </a>
+        </li>
+        <?php endif; ?>
+        <?php if(Social::find(1)->facebookLink !== ''): ?>
+        <li>
+            <a class='entypo-facebook' href='<?php echo Social::find(1)->facebookLink; ?>' target='_blank'>
+                 <i class="fa fa-facebook "></i>
+                <span>facebook</span>
+            </a>
+        </li>
+        <?php endif; ?>
+        <?php if(Social::find(1)->googlePlusLink !== ''): ?>
+        <li>
+            <a class='entypo-gplus' href='<?php echo Social::find(1)->googlePlusLink; ?>' target='_blank'>
+                <i class="fa fa-google-plus "></i>
+                <span>google+</span>
+            </a>
+        </li>
+        <?php endif; ?>
+    </ul>
+</div>
+<!-- /#SOCIAL Media SIDEBAR -->
+<?php endif; ?>
+<!-- Start Page Content -->     
+
+<div  class="col-md-12 ">
+
+<div id="showfile" class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                
+                 <i style="font-size:18px;" class="fa fa-cloud-download"></i> 
+                 Download File 
+            </div>
+            <div class="panel-body">
+            
+            <ul class="list-group col-md-6 text-left">
+                <li class="list-group-item">
+                    <span>
+                     <i style="font-size:18px;" class="fa fa-file-o"></i> File Name |    
+                    </span>
+                    <?php echo mb_substr($data['fileName'],0,20,"utf-8"); ?>
+
+                </li>
+                
+                <li class="list-group-item">   
+                    <span>
+                       <i style="font-size:18px;" class="fa fa-filter"></i> File Extension | 
+                    </span>
+                    <?php echo $data['fileExt']; ?>
+
+                </li>
+                
+                <li class="list-group-item">
+                    <span>
+                    <i style="font-size:18px;" class="fa fa-crosshairs"></i> File Size |
+                    </span>
+                    <?php echo $data['fileSize']; ?>
+
+                </li>
+                <br>
+
+              <?php if($data['isLocked']): ?>
+                <?php echo Form::open( array(
+                    'role' => 'form',
+                    'id' => 'downloadLocked',
+                    'url' =>  Request::path().'/downloadLocked' 
+                ) ); ?>
+
+                 <label for="password"><i class="fa fa-lock"></i> File Password</label>
+                <?php if( Session::has('message') ?
+                 $border= 'border-color:#a02a1b;': $border =''): ?><?php endif; ?>
+                <?php echo Form::password( 'password',array(
+                   'id'         =>'password',
+                   'tabindex'   => '1',
+                   'class'      => 'form-control',
+                   'style'      => $border,
+                   'placeholder'=> 'Password'
+               ) ); ?>
+
+               
+                <?php else: ?>
+                <?php echo Form::open( array(
+                    'role' => 'form',
+                    'id' => 'download',
+                    'url' =>Request::path()
+                ) ); ?>
+
+
+                <?php endif; ?>
+                
+               <?php echo Form::button('<i class="fa fa-cloud-download"></i> Download Now',
+                   array(
+                       'type' => 'submit',
+                       'class' => 'btn btn-primary',
+                       'id' => 'as'
+                   ));; ?>
+
+                
+                 <?php echo Form::close(); ?>
+
+              </ul>
+         <ul class="list-group col-md-6 col-right text-left">
+               
+                <li class="list-group-item">
+                    <span>
+                     <i class="fa fa-link"></i> Download Link
+                     
+                    </span>  
+                    <input style="margin-bottom:0px;" class="form-control" style="width:100%;" type="text" value="<?php echo $data['filePath']; ?>" readonly>
+                    
+
+                </li>
+                
+                <li class="list-group-item">
+                    <span>
+                     <i class="fa fa-code"></i> HTML Include (For Websites)
+                     
+                    </span>  
+                    <input style="margin-bottom:0px;" class="form-control" style="width:100%;"
+                     type="text" value="<?php echo htmlspecialchars('<a href="'.$data['filePath'].'">'.$data['fileName'].'</a>'); ?>" readonly>
+
+                </li>
+                         
+            <div class="text-left">
+
+            <h4 style="color:#1869A0;"><i class="fa fa-share-alt"></i> Share Via </h4>
+                <!-- just add href= for your links, like this: -->
+                <a class="btn btn-social-icon btn-facebook" onclick=" window.open('http://www.facebook.com/sharer/sharer.php?s=100&amp;p[url]=<?php echo $data['filePath']; ?>','','height=550,width=525,left=100,top=100,menubar=0')">
+                    <i class="fa fa-facebook"></i>
+                </a>    
+
+               
+                <a class="btn btn-social-icon btn-twitter"
+                  onclick=" window.open('https://www.twitter.com/share?<?php echo $data['filePath']; ?>','','height=550,width=525,left=100,top=100,menubar=0')"
+>
+                    <i class="fa fa-twitter"></i>
+                </a>
+
+                              <a class="btn btn-social-icon btn-google-plus"
+                  onclick=" window.open('https://plus.google.com/share?url=<?php echo $data['filePath']; ?>','','height=550,width=525,left=100,top=100,menubar=0')"
+>
+                    <i class="fa fa-google-plus"></i>
+                </a>
+
+
+              </div>
+
+                </div>
+                    
+              </ul>
+            
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+ <?php if( $data['bottomAds'] ): ?>
+    <!-- bottom Advertising Area  -->
+    <div class="col-md-12">
+    <div class="ads-bottom">
+        <?php echo $data['bottomAds']; ?>
+
+    </div>
+    </div>
+    <!-- /# bottom Advertising Area  -->
+    <?php endif; ?>
+</div>
+    
+   
+</div>
+
+
+    <!-- jQuery -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/jquery-1.11.3.min.js'); ?>
+
+    <!-- Bootstrap Core JavaScript -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/bootstrap.min.js'); ?>    
+
+   
+    <script language="javascript">
+        
+    $('form#download #as').click(function() {
+        $(this).removeClass('btn btn-primary').addClass('btn btn-primary m-progress btn-disabled');
+    });
+
+
+    <?php if($data['isLocked']): ?>
+    $('#downloadLocked').on('submit',function(e) {
+    e.preventDefault();
+        $.ajax({
+                url: <?php echo Request::path().'/downloadLocked'; ?>,
+                type: 'post',
+                cache:false,
+                dataType: "JSON",
+                data: {
+                    "_token": "<?php echo csrf_token(); ?>",
+                    "password": password
+                }
+            });
+          });
+
+    <?php else: ?>
+    $('#download').on('submit',function(e) {
+        $.ajax({
+                url: window.location,
+                type: 'post',
+                cache:false,
+                dataType: "JSON",
+                data: {
+                    "_token": "<?php echo csrf_token(); ?>"
+                }
+            });
+    });
+    <?php endif; ?>
+
+        
+    $('form#download #as').delay(3000).queue(function(){
+    $('form#download #as').removeClass("btn btn-primary m-progress btn-disabled").addClass('btn btn-primary');
+
+    });
+    
+    </script>
+
+</body>

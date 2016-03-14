@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<?php echo Settings::find(1)->description; ?>">
+    <meta name="keywords" content="<?php echo Settings::find(1)->keywords; ?>">
+    <link rel="icon" type="image/png" href="<?php echo url().'/public/themes/uploads/favicon.png'; ?>">
+    <title><?php echo $data['settings']->sitename; ?></title>
+    <!-- Bootstrap Core CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/bootstrap_2.min.css'); ?>
+
+    <!-- Font Awesome Fonts -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/font-awesome/css/font-awesome.min.css'); ?>
+
+    <!-- DropZone CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/basic.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/dropzone.css'); ?>
+
+    <!-- Custom CSS -->
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/social.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/navbar.css'); ?>
+
+    <?php echo HTML::style('public/themes/z-Responsive/assets/css/home.css'); ?>
+
+
+    <!-- DROPZONE Core JavaScript -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/dropzone.js'); ?>
+
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,300,500,700' rel='stylesheet'
+     type='text/css'>
+       <!-- SEO Meta  -->
+	<meta name="author" content="<?php echo $data['settings']->sitename; ?>">
+	<meta name="robots" content="INDEX,FOLLOW"/>
+	<meta name="robots" content="all"/>
+	<meta name="distribution" content="global"/>
+
+	<meta property="og:title" content="<?php echo $data['settings']->sitename; ?>" />
+	<meta property="og:image" content="<?php echo url().'/public/themes/uploads/logo.png'; ?>" />
+	<meta property="og:site_name" content="<?php echo Settings::find(1)->sitename; ?>"/>
+	<meta property="og:description" content="<?php echo Settings::find(1)->description; ?>" />
+	<link rel="image_src" href="<?php echo url().'/public/themes/uploads/logo.png'; ?>" />
+	<meta itemprop="name" content="<?php echo Settings::find(1)->sitename; ?>" />
+   
+   
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<style type="text/css">
+<?php echo ThemeCustomize::find(1)->someCss; ?>
+
+</style>
+
+<body>
+    
+<nav style="border-radius:0;" class="navbar navbar-default navbar-xs" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+      <a class="navbar-brand" href="<?php echo url('/'); ?>">
+        <img alt="Brand" src="<?php echo url().'/public/themes/uploads/logo.png'; ?>">
+      </a>
+    </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-right top-nav">
+            <li>
+                <a href="<?php echo URL().'/auth/login'; ?>">
+                  <i class="fa fa-lock"></i> Login
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo URL().'/auth/signup'; ?>">
+                    <i class="fa fa-user-plus"></i> Signup
+                </a>
+            </li>
+      </ul>
+    
+  </div><!-- /.navbar-collapse -->
+</nav>
+<div class="container">
+
+<?php if( $data['topAds'] ): ?>
+<!-- Top Advertising Area  -->
+<div class="col-md-12">
+<div class="ads-top">
+    <?php echo $data['topAds']; ?>
+
+</div>
+</div>
+<!-- /# TopAdvertising Area  -->
+<?php endif; ?>
+
+
+<?php if( Social::find(1) ): ?>
+<div id='social-sidebar'><!-- SOCIAL Media SIDEBAR -->
+<ul>
+   <?php if( Social::find(1)->twitterLink !== '' ): ?>
+    <li>
+        <a class='entypo-twitter' href='<?php echo Social::find(1)->twitterLink; ?>' target='_blank'>
+           <i class="fa fa-twitter "></i>
+            <span>Twitter</span>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if(Social::find(1)->facebookLink !== ''): ?>
+    <li>
+        <a class='entypo-facebook' href='<?php echo Social::find(1)->facebookLink; ?>' target='_blank'>
+             <i class="fa fa-facebook "></i>
+            <span>facebook</span>
+        </a>
+    </li>
+    <?php endif; ?>
+    <?php if(Social::find(1)->googlePlusLink !== ''): ?>
+    <li>
+        <a class='entypo-gplus' href='<?php echo Social::find(1)->googlePlusLink; ?>' target='_blank'>
+            <i class="fa fa-google-plus "></i>
+            <span>google+</span>
+        </a>
+    </li>
+    <?php endif; ?>
+</ul>
+</div> <!-- /#SOCIAL Media SIDEBAR -->
+<?php endif; ?>
+
+<div style=" padding: 30px 15px;" class="header-content">
+    <div class="header-content-inner">
+        <?php echo ThemeCustomize::find(1)->welcomeText; ?>
+
+    <hr style="width:50%">
+    <div id="dropzone">
+        <?php echo Form::open(array('url' => '/guestUploadFile', 'class'=>'dropzone', 'id'=>'my-dropzone')); ?>
+
+
+        <!-- Multiple file upload-->
+        
+        <div class="dz-message"><center>
+            <i style="font-size:45px" class="fa fa-cloud-upload fa-2x"></i>
+            <h4>Drag Your Files - Photos to Upload</h4>
+            <span>Or click to browse</span></center>
+            
+        </div> 
+
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+        </div>
+
+        <?php echo Form::close(); ?>
+
+        </div>
+
+
+    </div>
+</div>
+
+<?php if( $data['bottomAds'] ): ?>
+<!-- bottom Advertising Area  -->
+<div class="col-md-12">
+<div class="ads-bottom">
+    <?php echo $data['bottomAds']; ?>
+
+</div>
+</div>
+
+<!-- /# TopAdvertising Area  -->
+<?php endif; ?>
+
+<?php echo ThemeCustomize::find(1)->someHtml; ?>
+
+
+</div>
+ 
+
+
+    <!-- jQuery -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/jquery-1.11.3.min.js'); ?>
+
+    <!-- Bootstrap Core JavaScript -->
+    <?php echo HTML::script('public/themes/z-Responsive/assets/js/bootstrap.min.js'); ?>    
+
+   
+<script language="javascript">
+
+
+// myDropzone is the configuration for the element that has an id attribute
+  // with the value my-dropzone (or myDropzone)
+    Dropzone.options.myDropzone = {
+        maxFiles: 3,
+        maxFilesize: 2,
+
+
+  init: function () {
+       this.on("maxfilesexceeded", function(file){
+    });
+
+    this.on("success", function (file) {
+      if ( this.getQueuedFiles().length === 0 ) {
+            // Your application has indicated there's an error
+            window.setTimeout(function(){
+            // Move to a new location or you can do something else
+            // window.location = "<?php /* url('user/'.Auth::User()->username.'/files') */ ?>";
+                var url = "<?php echo url('/guest/'.Session::get('guestSession')); ?>"
+                
+            window.location = url;
+
+
+    }, 3000);
+      }
+    });
+  }
+};
+    
+    
+
+
+</script>
+</body>
